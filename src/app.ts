@@ -56,7 +56,7 @@ server.post('/new/mamifero', async (req, res) => {
     }
 })
 
-server.get('/list/ave', async (req, res) => {
+server.get('/list/aves', async (req, res) => {
     const ave = await Ave.listarAves();
 
     res.status(200).json(ave);
