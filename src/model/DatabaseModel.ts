@@ -29,6 +29,7 @@ export class DatabaseModel {
     constructor() {
         // Configuração padrão para conexão com o banco de dados
         this._config = {
+<<<<<<< HEAD
             user: process.env.DB_USER,
             host: process.env.DB_HOST,
             database: process.env.DB_NAME,
@@ -36,6 +37,15 @@ export class DatabaseModel {
             port: process.env.DB_PORT,
             max: 10,
             idleTimoutMillis: 10000
+=======
+            user: process.env.POSTGRES_USER,
+            host: process.env.POSTGRES_HOST,
+            database: process.env.POSTGRES_DB,
+            password: process.env.POSTGRES_PASSWORD,
+            port: process.env.POSTGRES_PORT,
+            max: 10, // Pool max size
+            idleTimeoutMillis: 10000
+>>>>>>> 8756dd6bd75330044591630d737e03e8e3daceb9
         }
 
         // Inicialização do pool de conexões

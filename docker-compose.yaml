@@ -1,0 +1,32 @@
+version: "3"
+services:
+  node:
+    container_name: "api-zoologico"
+    build: .
+    command: "npm run start"
+    working_dir: /home/node/app
+    environment:
+      - NODE_ENV=production
+    expose:
+      - "3000"
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:latest
+    container_name: postgres_db
+    restart: always
+    ports:
+      - "5499:5432"
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: Adm1n@23
+      POSTGRES_DB: zoologico
+    volumes:
+      - Y:\\docker-volumes\\postgres-dsi\\zoologico-dev:/var/lib/postgresql/data
+      - ./docs/sql:/docker-entrypoint-initdb.d
+    command: [ "postgres", "-c", "max_connections=1000" ]
+volumes:
+  postgres-data:
