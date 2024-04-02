@@ -5,6 +5,7 @@ import { Reptil } from "./model/Reptil";
 import { Mamifero } from "./model/Mamifero";
 import { Ave } from "./model/Ave";
 import { Animal } from "./model/Animal";
+import { Habitat } from "./model/Habitat";
 
 const server = express();
 const port: number = 3000;
@@ -72,11 +73,11 @@ server.get('/list/aves', async (req, res) => {
 
 // Rota para cadastrar todas as aves
 server.post('/new/ave', async (req, res) => {
-    const { nome, idade, genero, envergadura } = req.body;
-
+    const { nome, idade, genero, envergadura, idHabitat } = req.body;
+    
     const novaAve = new Ave(nome, idade, genero, envergadura);
 
-    const result = await Ave.cadastrarAve(novaAve);
+    const result = await Ave.cadastrarAve(novaAve, idHabitat);
 
     if(result) {
         return res.status(200).json('Ave cadastrado com sucesso');
@@ -91,6 +92,18 @@ server.get('/list/todos', async (req, res) => {
 
     res.status(200).json(todosAnimais.rows);
 })
+
+server.get('/list/habitats', async(req, res) => {
+    const listaHabitats = await Habitat.listarHabitats();
+
+    res.status(200).json(listaHabitats);
+})
+
+server.get('/list/animalhabitat/:idHabitat', async (req, res) => {
+    const listaAnimaisHabitat = await Habitat.exibirAnimaisPorHabitat(parseInt(req.params.idHabitat));
+    
+    res.status(200).json(listaAnimaisHabitat);
+});
 
 new DatabaseModel().testeConexao().then((resbd) => {
     if(resbd) {

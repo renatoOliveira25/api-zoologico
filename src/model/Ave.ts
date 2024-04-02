@@ -1,5 +1,6 @@
 import { Animal } from "./Animal";
 import { DatabaseModel } from "./DatabaseModel";
+import { Habitat } from "./Habitat";
 
 /**
  * Pool de conexão do banco de dados
@@ -93,7 +94,7 @@ export class Ave extends Animal {
      * @param ave Objeto do tipo Ave
      * @returns **true** caso sucesso, **false** caso erro
      */
-    static async cadastrarAve(ave: Ave): Promise<any> {
+    static async cadastrarAve(ave: Ave, idHabitat: number): Promise<any> {
         // Cria uma variável do tipo booleano para guardar o status do resultado da query
         let insertResult = false;
 
@@ -113,6 +114,8 @@ export class Ave extends Animal {
                     const queryInsertAve = `INSERT INTO ave (idAve, envergadura)
                                                 VALUES
                                                 (${idAnimal}, ${ave.getEnvergadura()})`;
+
+                    Habitat.inserirAnimalHabitat(idAnimal, idHabitat);
 
                     // Faz a query de insert da raça do mamífero no banco de dados
                     await database.query(queryInsertAve)

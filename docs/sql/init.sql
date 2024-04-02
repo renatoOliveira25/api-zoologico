@@ -39,13 +39,13 @@ INSERT INTO Animal(nomeAnimal, idadeAnimal, generoAnimal)
 	VALUES
 	('SIMBA', 7, 'MACHO'),			-- id 1
 	('PUMBA', 4, 'MACHO'),			-- id 2
-	('NALA', 6, 'FÊMEA'),			-- id 3
+	('NALA', 6, 'FEMEA'),			-- id 3
 	('ZAZU', 1, 'MACHO'),			-- id 4
 	('IAGO', 2, 'MACHO'),			-- id 5
-	('SCUTTLE', 4, 'FÊMEA'),		-- id 6
+	('SCUTTLE', 4, 'FEMEA'),		-- id 6
 	('KAA', 1, 'MACHO'),			-- id 7
 	('LOUIS', 5, 'MACHO'),			-- id 8
-	('TICK-TOCK', 3, 'FÊMEA');		-- id 9
+	('TICK-TOCK', 3, 'FEMEA');		-- id 9
 	
 INSERT INTO Mamifero(idMamifero, especie)
 	VALUES
