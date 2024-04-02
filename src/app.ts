@@ -28,11 +28,11 @@ server.get('/list/reptil', async (req, res) => {
 
 // Rota para cadastrar um reptil
 server.post('/new/reptil', async (req, res) => {
-    const { nome, idade, genero, tipo_de_escamas } = req.body;
+    const { nome, idade, genero, tipo_de_escamas, idHabitat } = req.body;
 
     const novoReptil = new Reptil(nome, idade, genero, tipo_de_escamas);
 
-    const result = await Reptil.cadastrarReptil(novoReptil);
+    const result = await Reptil.cadastrarReptil(novoReptil, idHabitat);
 
     if(result) {
         return res.status(200).json('Reptil cadastrado com sucesso');
@@ -51,11 +51,11 @@ server.get('/list/mamifero', async (req, res) => {
 
 // Rota para cadastrar um mamífero
 server.post('/new/mamifero', async (req, res) => {
-    const { nome, idade, genero, raca } = req.body;
+    const { nome, idade, genero, raca, idHabitat } = req.body;
 
     const novoMamifero = new Mamifero(raca, nome, idade, genero);
 
-    const result = await Mamifero.cadastrarMamifero(novoMamifero);
+    const result = await Mamifero.cadastrarMamifero(novoMamifero, idHabitat);
 
     if(result) {
         return res.status(200).json('Mamifero cadastrado com sucesso');

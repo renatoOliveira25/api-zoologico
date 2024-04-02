@@ -115,6 +115,7 @@ export class Ave extends Animal {
                                                 VALUES
                                                 (${idAnimal}, ${ave.getEnvergadura()})`;
 
+                    // Inserindo o animal no Habitat
                     Habitat.inserirAnimalHabitat(idAnimal, idHabitat);
 
                     // Faz a query de insert da raça do mamífero no banco de dados
