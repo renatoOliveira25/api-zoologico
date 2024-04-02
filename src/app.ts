@@ -4,6 +4,7 @@ import { DatabaseModel } from "./model/DatabaseModel";
 import { Reptil } from "./model/Reptil";
 import { Mamifero } from "./model/Mamifero";
 import { Ave } from "./model/Ave";
+import { Animal } from "./model/Animal";
 
 const server = express();
 const port: number = 3000;
@@ -11,16 +12,20 @@ const port: number = 3000;
 server.use(express.json());
 server.use(cors());
 
+// Rota principal, usada para testar o servidor
+// NÃO COLOCAR EM PRODUÇÃO
 server.get('/', (req, res) => {
     res.json("ola");
 });
 
+// Rota para listar todos os repteis
 server.get('/list/reptil', async (req, res) => {
     const repteis = await Reptil.listarRepteis();
 
     res.status(200).json(repteis);
 })
 
+// Rota para cadastrar um reptil
 server.post('/new/reptil', async (req, res) => {
     const { nome, idade, genero, tipo_de_escamas } = req.body;
 
@@ -36,12 +41,14 @@ server.post('/new/reptil', async (req, res) => {
     
 })
 
+// Rota para listar todos os mamiferos
 server.get('/list/mamifero', async (req, res) => {
     const mamifero = await Mamifero.listarMamiferos();
 
     res.status(200).json(mamifero);
 })
 
+// Rota para cadastrar um mamífero
 server.post('/new/mamifero', async (req, res) => {
     const { nome, idade, genero, raca } = req.body;
 
@@ -56,12 +63,14 @@ server.post('/new/mamifero', async (req, res) => {
     }
 })
 
+// Rota para listar todos as aves
 server.get('/list/aves', async (req, res) => {
     const ave = await Ave.listarAves();
 
     res.status(200).json(ave);
 })
 
+// Rota para cadastrar todas as aves
 server.post('/new/ave', async (req, res) => {
     const { nome, idade, genero, envergadura } = req.body;
 
@@ -74,6 +83,13 @@ server.post('/new/ave', async (req, res) => {
     } else {
         return res.status(400).json('Não foi possível cadastrar o ave no banco de dados');
     }
+})
+
+// Rota para listar todos os animais
+server.get('/list/todos', async (req, res) => {
+    const  todosAnimais = await Animal.listarTodosAnimais();
+
+    res.status(200).json(todosAnimais.rows);
 })
 
 new DatabaseModel().testeConexao().then((resbd) => {
